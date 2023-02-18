@@ -1,0 +1,24 @@
+@media (max-width: 54em) {
+  .container {
+    position: absolute;
+  }
+  .main-container {
+    position: relative;
+  }
+  .new {
+    top: 10px;
+    left: auto;
+    right: 10px;
+  }
+}
+@media (max-width: 30em) {
+  .main-container {
+    padding: 0;
+  }
+  .btns {
+    padding: 0;
+  }
+  .main-btn{
+    padding: 0.5rem 1rem;
+  }
+}
