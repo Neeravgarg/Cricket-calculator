@@ -187,8 +187,15 @@ wide.addEventListener("click", function () {
   sentence();
 });
 nb.addEventListener("click", function () {
-  runs += 1;
+  runs++;
   main_runs.textContent = runs;
+  if (active_player == 0) {
+    runs_player0++;
+  } else if (active_player == 1) {
+    runs_player1++;
+  }
+  run_rate();
+  sentence();
 });
 wicket.addEventListener("click", function () {
   switch (inning) {
