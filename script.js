@@ -62,7 +62,7 @@ const starting = function () {
   wtc_btn_click = 0;
   the_balls = 0;
   run__rate = 0;
-  runrate.textContent = 0;
+  runrate.textContent = "0.00";
   main_runs.textContent = 0;
   overs.textContent = 0;
   balls.textContent = 0;
@@ -83,7 +83,6 @@ const starting = function () {
   document.querySelector(".leadtextwon").textContent = " has the lead of ";
   document.querySelector(".leadruns").textContent = 0;
   document.querySelector(".some-words").textContent = " runs";
-  runrate.textContent = 0;
   document.querySelector(".bat6").textContent = bat_6;
   document.querySelector(".bat1").textContent = bat_1;
   document.querySelector(".bat0").textContent = bat_0;
@@ -115,11 +114,25 @@ const run_rate = function () {
   run__rate = (runs / the_balls) * 6;
   runrate.textContent = run__rate.toFixed(2);
 };
+const sentence = function(){
+  if (runs_player0 > runs_player1) {
+    document.querySelector(".leadplayer").textContent = "Player 1";
+    document.querySelector(".leadruns").textContent =
+      runs_player0 - runs_player1;
+  } else if (runs_player1 > runs_player0) {
+    document.querySelector(".leadplayer").textContent = "Player 2";
+    document.querySelector(".leadruns").textContent =
+      runs_player1 - runs_player0;
+  } else if (runs_player0 === runs_player1) {
+    document.querySelector(".leadruns").textContent = 0;
+  }
+}
 
 btn6.addEventListener("click", function () {
   run_adder(6);
   over_change();
   run_rate();
+  sentence()
   bat_6 += 1;
   document.querySelector(".bat6").textContent = bat_6;
 });
@@ -127,6 +140,7 @@ btn1.addEventListener("click", function () {
   run_adder(1);
   over_change();
   run_rate();
+  sentence()
   bat_1 += 1;
   document.querySelector(".bat1").textContent = bat_1;
 });
@@ -134,6 +148,7 @@ btn0.addEventListener("click", function () {
   run_adder(0);
   over_change();
   run_rate();
+  sentence()
   bat_0 += 1;
   document.querySelector(".bat0").textContent = bat_0;
 });
@@ -141,6 +156,7 @@ btn2.addEventListener("click", function () {
   run_adder(2);
   over_change();
   run_rate();
+  sentence()
   bat_2 += 1;
   document.querySelector(".bat2").textContent = bat_2;
 });
@@ -148,18 +164,27 @@ btn3.addEventListener("click", function () {
   run_adder(3);
   over_change();
   run_rate();
+  sentence()
   bat_3 += 1;
 });
 btn4.addEventListener("click", function () {
   run_adder(4);
   over_change();
   run_rate();
+  sentence()
   bat_4 += 1;
   document.querySelector(".bat4").textContent = bat_4;
 });
 wide.addEventListener("click", function () {
-  runs += 1;
+  runs++;
   main_runs.textContent = runs;
+  if (active_player == 0) {
+    runs_player0++;
+  } else if (active_player == 1) {
+    runs_player1++;
+  }
+  run_rate();
+  sentence();
 });
 nb.addEventListener("click", function () {
   runs += 1;
