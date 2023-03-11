@@ -190,7 +190,8 @@ const needSentence = function () {
     console.log(target_runs);
     document.querySelector(".leadplayer").textContent = "Player 1 ";
     document.querySelector(".leadtextwon").textContent = " needs ";
-    document.querySelector(".leadruns").textContent = totalPlayer1 - totalPlayer0 + 1
+    document.querySelector(".leadruns").textContent =
+      totalPlayer1 - totalPlayer0 + 1;
     document.querySelector(".some-words").textContent = " to win";
   }
 };
@@ -353,3 +354,8 @@ wicket.addEventListener("click", function () {
 new_game.addEventListener("click", function () {
   starting();
 });
+
+const currentYear = new Date().getFullYear();
+document.querySelector(".year").textContent = currentYear;
+let version = "3.1";
+document.querySelector(".verison").textContent = version;
