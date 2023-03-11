@@ -25,6 +25,7 @@ const bat6 = document.querySelectorAll(".bat6");
 const lead = document.querySelector(".leadruns");
 const runrate = document.querySelector(".run_rate");
 const new_game = document.querySelector(".new");
+const target = document.querySelector(".target");
 
 let active_player,
   runs,
@@ -42,7 +43,12 @@ let active_player,
   inning,
   wtc_btn_click,
   the_balls,
-  run__rate;
+  run__rate,
+  target_runs,
+  scoreBoard,
+  totalPlayer0,
+  totalPlayer1,
+  fix;
 
 const starting = function () {
   active_player = 0;
@@ -62,6 +68,10 @@ const starting = function () {
   wtc_btn_click = 0;
   the_balls = 0;
   run__rate = 0;
+  target_runs = 0;
+  totalPlayer0 = 0;
+  totalPlayer1 = 0;
+  fix = false;
   runrate.textContent = "0.00";
   main_runs.textContent = 0;
   overs.textContent = 0;
@@ -79,6 +89,7 @@ const starting = function () {
   p0i1.textContent = 0;
   p1i0.textContent = 0;
   p1i1.textContent = 0;
+  scoreBoard = [0, 0, 0, 0];
   document.querySelector(".leadplayer").textContent = "Player 1";
   document.querySelector(".leadtextwon").textContent = " has the lead of ";
   document.querySelector(".leadruns").textContent = 0;
@@ -114,7 +125,35 @@ const run_rate = function () {
   run__rate = (runs / the_balls) * 6;
   runrate.textContent = run__rate.toFixed(2);
 };
-const sentence = function(){
+const extraRunAdder = function () {
+  runs++;
+  main_runs.textContent = runs;
+  if (active_player == 0) {
+    runs_player0++;
+  } else if (active_player == 1) {
+    runs_player1++;
+  }
+};
+const lost = function () {
+  btn0.disabled = true;
+  btn1.disabled = true;
+  btn2.disabled = true;
+  btn3.disabled = true;
+  btn4.disabled = true;
+  btn6.disabled = true;
+  wicket.disabled = true;
+  wide.disabled = true;
+  nb.disabled = true;
+};
+const playerWins = function (playerNumber) {
+  document.querySelector(".leadplayer").textContent = `Player ${
+    playerNumber === 0 ? 1 : 2
+  } `;
+  document.querySelector(".leadtextwon").textContent = "has won the match";
+  document.querySelector(".leadruns").textContent = " ";
+  document.querySelector(".some-words").textContent = " ";
+};
+const sentence = function () {
   if (runs_player0 > runs_player1) {
     document.querySelector(".leadplayer").textContent = "Player 1";
     document.querySelector(".leadruns").textContent =
@@ -126,124 +165,164 @@ const sentence = function(){
   } else if (runs_player0 === runs_player1) {
     document.querySelector(".leadruns").textContent = 0;
   }
-}
+
+  if (wtc_btn_click === 3 && scoreBoard[1] > scoreBoard[0] + scoreBoard[2]) {
+    lost();
+    playerWins(1);
+  }
+};
+const liveUpdateUpdater = function (index) {
+  scoreBoard[index] = runs;
+  if (index === 0 || index === 2) {
+    totalPlayer0 = scoreBoard[0] + scoreBoard[2];
+  } else if (index === 1 || index === 3) {
+    totalPlayer1 = scoreBoard[1] + scoreBoard[3];
+  }
+};
+const fixSentence = function () {
+  if (fix == true && totalPlayer1 > totalPlayer0) {
+    lost();
+    playerWins();
+  }
+};
+const needSentence = function () {
+  if (fix == true) {
+    console.log(target_runs);
+    document.querySelector(".leadplayer").textContent = "Player 1 ";
+    document.querySelector(".leadtextwon").textContent = " needs ";
+    document.querySelector(".leadruns").textContent = totalPlayer1 - totalPlayer0 + 1
+    document.querySelector(".some-words").textContent = " to win";
+  }
+};
+const liveUpdate = function () {
+  switch (inning) {
+    case 1:
+      liveUpdateUpdater(0);
+    case 2:
+      liveUpdateUpdater(1);
+    case 3:
+      liveUpdateUpdater(2);
+    case 4:
+      liveUpdateUpdater(3);
+  }
+};
 
 btn6.addEventListener("click", function () {
   run_adder(6);
   over_change();
   run_rate();
-  sentence()
+  sentence();
   bat_6 += 1;
   document.querySelector(".bat6").textContent = bat_6;
+  liveUpdate();
+  fixSentence();
+  needSentence();
 });
 btn1.addEventListener("click", function () {
   run_adder(1);
   over_change();
   run_rate();
-  sentence()
+  sentence();
   bat_1 += 1;
   document.querySelector(".bat1").textContent = bat_1;
+  liveUpdate();
+  fixSentence();
+  needSentence();
 });
 btn0.addEventListener("click", function () {
   run_adder(0);
   over_change();
   run_rate();
-  sentence()
+  sentence();
   bat_0 += 1;
   document.querySelector(".bat0").textContent = bat_0;
+  liveUpdate();
+  fixSentence();
+  needSentence();
 });
 btn2.addEventListener("click", function () {
   run_adder(2);
   over_change();
   run_rate();
-  sentence()
+  sentence();
   bat_2 += 1;
   document.querySelector(".bat2").textContent = bat_2;
+  liveUpdate();
+  fixSentence();
+  needSentence();
 });
 btn3.addEventListener("click", function () {
   run_adder(3);
   over_change();
   run_rate();
-  sentence()
+  sentence();
   bat_3 += 1;
+  liveUpdate();
+  fixSentence();
+  needSentence();
 });
 btn4.addEventListener("click", function () {
   run_adder(4);
   over_change();
   run_rate();
-  sentence()
+  sentence();
   bat_4 += 1;
   document.querySelector(".bat4").textContent = bat_4;
+  liveUpdate();
+  fixSentence();
+  needSentence();
 });
 wide.addEventListener("click", function () {
-  runs++;
-  main_runs.textContent = runs;
-  if (active_player == 0) {
-    runs_player0++;
-  } else if (active_player == 1) {
-    runs_player1++;
-  }
+  extraRunAdder();
   run_rate();
   sentence();
+  fixSentence();
+  needSentence();
 });
 nb.addEventListener("click", function () {
-  runs++;
-  main_runs.textContent = runs;
-  if (active_player == 0) {
-    runs_player0++;
-  } else if (active_player == 1) {
-    runs_player1++;
-  }
+  extraRunAdder();
   run_rate();
   sentence();
+  fixSentence();
+  needSentence();
 });
 wicket.addEventListener("click", function () {
   switch (inning) {
     case 1:
+      scoreBoard[0] = runs;
       p0i0.textContent = runs;
       inning = 2;
       break;
 
     case 2:
+      scoreBoard[1] = runs;
       p1i0.textContent = runs;
       inning = 3;
       break;
 
     case 3:
+      scoreBoard[2] = runs;
       p0i1.textContent = runs;
+      target_runs = scoreBoard[0] + scoreBoard[2] - scoreBoard[1] + 1;
+      target.textContent = target_runs;
       inning = 4;
+      fix = true;
       break;
 
     case 4:
+      scoreBoard[3] = runs;
       p1i1.textContent = runs;
       inning = 0;
-      btn0.disabled = true;
-      btn1.disabled = true;
-      btn2.disabled = true;
-      btn3.disabled = true;
-      btn4.disabled = true;
-      btn6.disabled = true;
-      wicket.disabled = true;
-      wide.disabled = true;
-      nb.disabled = true;
+      lost();
       break;
-  }
-  if (runs_player0 > runs_player1) {
-    document.querySelector(".leadplayer").textContent = "Player 1";
-    document.querySelector(".leadruns").textContent =
-      runs_player0 - runs_player1;
-  } else if (runs_player1 > runs_player0) {
-    document.querySelector(".leadplayer").textContent = "Player 2";
-    document.querySelector(".leadruns").textContent =
-      runs_player1 - runs_player0;
-  } else if (runs_player0 === runs_player1) {
-    document.querySelector(".leadruns").textContent = 0;
   }
   runs = 0;
   main_runs.textContent = runs;
   over = 0;
   ball = 0;
   the_balls = 0;
+  run__rate = 0;
+  runrate.textContent = "0.00";
   balls.textContent = ball;
   overs.textContent = over;
   document.querySelector(".player-name").textContent = `Player ${
@@ -256,22 +335,10 @@ wicket.addEventListener("click", function () {
   }
   wtc_btn_click += 1;
   if (wtc_btn_click === 4) {
-    if (
-      parseInt(p0i0.textContent) + parseInt(p0i1.textContent) >
-      parseInt(p1i0.textContent) + parseInt(p1i1.textContent)
-    ) {
-      document.querySelector(".leadplayer").textContent = "Player 1 ";
-      document.querySelector(".leadtextwon").textContent = "has won the match";
-      document.querySelector(".leadruns").textContent = " ";
-      document.querySelector(".some-words").textContent = " ";
-    } else if (
-      parseInt(p0i0.textContent) + parseInt(p0i1.textContent) <
-      parseInt(p1i0.textContent) + parseInt(p1i1.textContent)
-    ) {
-      document.querySelector(".leadplayer").textContent = "Player 2 ";
-      document.querySelector(".leadtextwon").textContent = "has won the match";
-      document.querySelector(".leadruns").textContent = " ";
-      document.querySelector(".some-words").textContent = " ";
+    if (scoreBoard[0] + scoreBoard[2] > scoreBoard[1] + scoreBoard[3]) {
+      playerWins(1);
+    } else if (scoreBoard[0] + scoreBoard[2] < scoreBoard[1] + scoreBoard[3]) {
+      playerWins(0);
     } else {
       document.querySelector(".leadplayer").textContent = "There is a draw";
       document.querySelector(".leadtextwon").textContent = "";
@@ -279,6 +346,8 @@ wicket.addEventListener("click", function () {
       document.querySelector(".some-words").textContent = " ";
     }
   }
+  sentence();
+  needSentence();
 });
 
 new_game.addEventListener("click", function () {
