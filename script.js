@@ -357,5 +357,5 @@ new_game.addEventListener("click", function () {
 
 const currentYear = new Date().getFullYear();
 document.querySelector(".year").textContent = currentYear;
-let version = "3.1";
+let version = "3.2";
 document.querySelector(".verison").textContent = version;
