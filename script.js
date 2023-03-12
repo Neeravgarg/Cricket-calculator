@@ -183,6 +183,7 @@ const fixSentence = function () {
   if (fix == true && totalPlayer1 > totalPlayer0) {
     lost();
     playerWins();
+    p1i1.textContent = runs;
   }
 };
 const needSentence = function () {
@@ -190,8 +191,7 @@ const needSentence = function () {
     console.log(target_runs);
     document.querySelector(".leadplayer").textContent = "Player 1 ";
     document.querySelector(".leadtextwon").textContent = " needs ";
-    document.querySelector(".leadruns").textContent =
-      totalPlayer1 - totalPlayer0 + 1;
+    document.querySelector(".leadruns").textContent = target_runs - runs;
     document.querySelector(".some-words").textContent = " to win";
   }
 };
@@ -216,8 +216,8 @@ btn6.addEventListener("click", function () {
   bat_6 += 1;
   document.querySelector(".bat6").textContent = bat_6;
   liveUpdate();
-  fixSentence();
   needSentence();
+  fixSentence();
 });
 btn1.addEventListener("click", function () {
   run_adder(1);
@@ -227,8 +227,8 @@ btn1.addEventListener("click", function () {
   bat_1 += 1;
   document.querySelector(".bat1").textContent = bat_1;
   liveUpdate();
-  fixSentence();
   needSentence();
+  fixSentence();
 });
 btn0.addEventListener("click", function () {
   run_adder(0);
@@ -238,8 +238,8 @@ btn0.addEventListener("click", function () {
   bat_0 += 1;
   document.querySelector(".bat0").textContent = bat_0;
   liveUpdate();
-  fixSentence();
   needSentence();
+  fixSentence();
 });
 btn2.addEventListener("click", function () {
   run_adder(2);
@@ -249,8 +249,8 @@ btn2.addEventListener("click", function () {
   bat_2 += 1;
   document.querySelector(".bat2").textContent = bat_2;
   liveUpdate();
-  fixSentence();
   needSentence();
+  fixSentence();
 });
 btn3.addEventListener("click", function () {
   run_adder(3);
@@ -259,8 +259,8 @@ btn3.addEventListener("click", function () {
   sentence();
   bat_3 += 1;
   liveUpdate();
-  fixSentence();
   needSentence();
+  fixSentence();
 });
 btn4.addEventListener("click", function () {
   run_adder(4);
@@ -270,22 +270,22 @@ btn4.addEventListener("click", function () {
   bat_4 += 1;
   document.querySelector(".bat4").textContent = bat_4;
   liveUpdate();
-  fixSentence();
   needSentence();
+  fixSentence();
 });
 wide.addEventListener("click", function () {
   extraRunAdder();
   run_rate();
   sentence();
-  fixSentence();
   needSentence();
+  fixSentence();
 });
 nb.addEventListener("click", function () {
   extraRunAdder();
   run_rate();
   sentence();
-  fixSentence();
   needSentence();
+  fixSentence();
 });
 wicket.addEventListener("click", function () {
   switch (inning) {

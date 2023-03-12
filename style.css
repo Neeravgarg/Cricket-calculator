@@ -67,6 +67,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border-bottom: 2px solid #666;
+  gap: 1rem;
 }
 .bowl {
   display: grid;

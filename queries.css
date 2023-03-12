@@ -10,6 +10,9 @@
     left: auto;
     right: 10px;
   }
+  .copyright-version{
+    bottom: -5%;
+  }
 }
 @media (max-width: 30em) {
   .main-container {
@@ -20,5 +23,12 @@
   }
   .main-btn{
     padding: 0.5rem 1rem;
+  }
+  .copyright-version{
+    bottom: -10%;
+  }
+  .Feed{
+    right: 10%;
+    left: auto;
   }
 }
