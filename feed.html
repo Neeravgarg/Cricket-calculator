@@ -5,15 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Feedback</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="1v1test.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
   </head>
   <body class="body">
-    <a href="index.html" class="feedback" id="feed">back</a>
+    <a href="1v1test.html" class="feedback" id="feed">back</a>
     <form class="form" name="feedback" netlify>
       <input type="text" class="in" name="name" placeholder="Full Name" />
       <input type="email" class="in" name="email" placeholder="Email ID" />
-      <input type="text" class="in" name="feedback" placeholder="Feedback" />
+      <textarea
+        type="text"
+        class="in"
+        name="feedback"
+        placeholder="Feedback"
+      ></textarea>
       <button class="in" id="in">Send</button>
     </form>
+    <p class="copyright-version">
+      <span>&copy; </span><span class="year">2022</span> by Neerav Garg<span
+        class="white"
+        >---</span
+      ><span>v</span><span class="verison">3.0</span>
+    </p>
+    <script>
+      const currentYear = new Date().getFullYear();
+      document.querySelector(".year").textContent = currentYear;
+      let version = "3.4";
+      document.querySelector(".verison").textContent = version;
+    </script>
   </body>
 </html>
