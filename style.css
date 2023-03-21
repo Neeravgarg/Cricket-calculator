@@ -6,6 +6,7 @@
 body {
   font-size: 62.5%;
   font-family: "Rubik", sans-serif;
+  background-color: #55e6c1;
 }
 .container {
   width: 100vw;
@@ -23,6 +24,7 @@ body {
   padding: 2rem;
   box-shadow: 0 0.3rem 3rem rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
+  background-color: #fff;
 }
 .score {
   padding: 1rem;
@@ -41,6 +43,7 @@ body {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   padding: 1rem;
+  display: none;
 }
 .head {
   display: grid;
@@ -127,7 +130,7 @@ body {
 .lead {
   padding: 1rem;
 }
-.target_cont{
+.target_cont {
   margin-left: 1rem;
 }
 .runrate {
@@ -192,35 +195,35 @@ body {
   padding: 0.5rem;
   text-decoration: none;
   color: #999;
-  font-size:1.25rem ;
+  font-size: 1.25rem;
   border: 2px solid #bbb;
   border-radius: 0.5rem;
   transition: all 0.3s;
 }
 
 #feed:hover,
-#feed:active{
+#feed:active {
   background-color: #bbb;
   color: #666;
 }
 
-.in{
+.in {
   border: 2px solid #bbb;
   height: 3rem;
   padding: 1rem;
   border-radius: 0.2rem;
 }
 
-#in{
+#in {
   transition: all 0.3s;
 }
 
 #in:hover,
-#in:active{
+#in:active {
   background-color: #bbb;
   color: #666;
 }
-.copyright-version{
+.copyright-version {
   position: absolute;
   left: 50%;
   bottom: 1%;
@@ -228,6 +231,45 @@ body {
   color: #999;
   font-size: 0.75rem;
 }
-.white{
-  color: #fff;
+.white {
+  color: #55e6c1;
+}
+
+.ball {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid #666;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+.time-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.the {
+  margin-left: 1rem;
+}
+ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+li {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid #666;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 1rem;
+}
+
+.nonedis {
+  display: none;
 }

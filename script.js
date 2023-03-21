@@ -26,6 +26,14 @@ const lead = document.querySelector(".leadruns");
 const runrate = document.querySelector(".run_rate");
 const new_game = document.querySelector(".new");
 const target = document.querySelector(".target");
+const ball1 = document.querySelector(".ball-1");
+const ball2 = document.querySelector(".ball-2");
+const ball3 = document.querySelector(".ball-3");
+const ball4 = document.querySelector(".ball-4");
+const ball5 = document.querySelector(".ball-5");
+const ball6 = document.querySelector(".ball-6");
+const theLastBall = document.querySelector(".last_ball");
+const listEl = document.querySelector("ul");
 
 let active_player,
   runs,
@@ -48,7 +56,19 @@ let active_player,
   scoreBoard,
   totalPlayer0,
   totalPlayer1,
-  fix;
+  fix,
+  ball_1,
+  ball_2,
+  ball_3,
+  ball_4,
+  ball_5,
+  ball_6,
+  active_ball,
+  activeTimeline,
+  lastBall,
+  limit,
+  extra,
+  extraBalls;
 
 const starting = function () {
   active_player = 0;
@@ -61,6 +81,18 @@ const starting = function () {
   bat_3 = 0;
   bat_4 = 0;
   bat_6 = 0;
+  ball_1 = "";
+  ball_2 = "";
+  ball_3 = "";
+  ball_4 = "";
+  ball_5 = "";
+  ball_6 = "";
+  activeTimeline = [0, 0, 0, 0, 0, 0];
+  active_ball = 0;
+  limit = 6;
+  extra = false;
+  extraBalls = 0;
+  lastBall = 0;
   leadruns = 0;
   runs_player0 = 0;
   runs_player1 = 0;
@@ -102,6 +134,51 @@ const starting = function () {
 };
 starting();
 
+const defaultTimeline = function () {
+  activeTimeline = [0, 0, 0, 0, 0, 0];
+  ball1.textContent = "";
+  ball2.textContent = "";
+  ball3.textContent = "";
+  ball4.textContent = "";
+  ball5.textContent = "";
+  ball6.textContent = "";
+  console.log(activeTimeline);
+  console.log("defaultTimeline function called");
+  while (limit > 6) {
+    console.log(extraBalls);
+    // document.querySelector(`.ball-${limit}`).classList.add("nonedis");    Not Working
+    // document.querySelector(".ball-7").classList.add("nonedis");           Working but not dynamic
+    // var counterNode = document.removeElement("li");
+    // document.querySelector("ul").appendChild(counterNode);                Not working
+    listEl.removeChild(listEl.lastElementChild); //Working 🎉
+    limit--;
+  }
+  active_ball = 0;
+};
+const timeLine = function (value) {
+  lastBall = value;
+  activeTimeline[active_ball] = value;
+  document.querySelector(`.ball-${active_ball + 1}`).textContent =
+    activeTimeline[active_ball];
+  active_ball += 1;
+  theLastBall.textContent = lastBall;
+  console.log(activeTimeline);
+  console.log(active_ball);
+  console.log(limit);
+  console.log(extraBalls);
+  if (active_ball === limit) {
+    defaultTimeline();
+  }
+};
+const specialTimeline = function (value) {
+  extraBalls += 1;
+  limit += 1;
+  var node = document.createElement("li");
+  node.classList.add(`ball-${limit}`);
+  node.appendChild(document.createTextNode(""));
+  listEl.appendChild(node);
+  timeLine(value);
+};
 const over_change = function () {
   ball += 1;
   if (ball === 6) {
@@ -149,7 +226,7 @@ const playerWins = function (playerNumber) {
   document.querySelector(".leadplayer").textContent = `Player ${
     playerNumber === 0 ? 1 : 2
   } `;
-  document.querySelector(".leadtextwon").textContent = "has won the match";
+  document.querySelector(".leadtextwon").textContent = " has won the match";
   document.querySelector(".leadruns").textContent = " ";
   document.querySelector(".some-words").textContent = " ";
 };
@@ -167,6 +244,16 @@ const sentence = function () {
   }
 
   if (wtc_btn_click === 3 && scoreBoard[1] > scoreBoard[0] + scoreBoard[2]) {
+    lost();
+    playerWins(1);
+  }
+};
+const sentence2 = function () {
+  if (
+    wtc_btn_click === 3 &&
+    scoreBoard[1] > scoreBoard[0] + scoreBoard[2] &&
+    fix == true
+  ) {
     lost();
     playerWins(1);
   }
@@ -207,6 +294,11 @@ const liveUpdate = function () {
       liveUpdateUpdater(3);
   }
 };
+const fix2 = function () {
+  if (inning == 0 && fix == false) {
+    document.querySelector(".leadruns").textContent = " ";
+  }
+};
 
 btn6.addEventListener("click", function () {
   run_adder(6);
@@ -218,6 +310,7 @@ btn6.addEventListener("click", function () {
   liveUpdate();
   needSentence();
   fixSentence();
+  timeLine(6);
 });
 btn1.addEventListener("click", function () {
   run_adder(1);
@@ -229,6 +322,7 @@ btn1.addEventListener("click", function () {
   liveUpdate();
   needSentence();
   fixSentence();
+  timeLine(1);
 });
 btn0.addEventListener("click", function () {
   run_adder(0);
@@ -240,6 +334,7 @@ btn0.addEventListener("click", function () {
   liveUpdate();
   needSentence();
   fixSentence();
+  timeLine(0);
 });
 btn2.addEventListener("click", function () {
   run_adder(2);
@@ -251,6 +346,7 @@ btn2.addEventListener("click", function () {
   liveUpdate();
   needSentence();
   fixSentence();
+  timeLine(2);
 });
 btn3.addEventListener("click", function () {
   run_adder(3);
@@ -261,6 +357,7 @@ btn3.addEventListener("click", function () {
   liveUpdate();
   needSentence();
   fixSentence();
+  timeLine(3);
 });
 btn4.addEventListener("click", function () {
   run_adder(4);
@@ -272,6 +369,7 @@ btn4.addEventListener("click", function () {
   liveUpdate();
   needSentence();
   fixSentence();
+  timeLine(4);
 });
 wide.addEventListener("click", function () {
   extraRunAdder();
@@ -279,6 +377,7 @@ wide.addEventListener("click", function () {
   sentence();
   needSentence();
   fixSentence();
+  specialTimeline("wd");
 });
 nb.addEventListener("click", function () {
   extraRunAdder();
@@ -286,6 +385,7 @@ nb.addEventListener("click", function () {
   sentence();
   needSentence();
   fixSentence();
+  specialTimeline("nb");
 });
 wicket.addEventListener("click", function () {
   switch (inning) {
@@ -314,6 +414,7 @@ wicket.addEventListener("click", function () {
       scoreBoard[3] = runs;
       p1i1.textContent = runs;
       inning = 0;
+      fix = false;
       lost();
       break;
   }
@@ -347,8 +448,12 @@ wicket.addEventListener("click", function () {
       document.querySelector(".some-words").textContent = " ";
     }
   }
+  theLastBall.textContent = "Wicket";
+  defaultTimeline();
   sentence();
   needSentence();
+  sentence2();
+  fix2();
 });
 
 new_game.addEventListener("click", function () {
@@ -357,5 +462,5 @@ new_game.addEventListener("click", function () {
 
 const currentYear = new Date().getFullYear();
 document.querySelector(".year").textContent = currentYear;
-let version = "3.2";
+let version = "3.3";
 document.querySelector(".verison").textContent = version;
