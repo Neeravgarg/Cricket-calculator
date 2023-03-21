@@ -4,24 +4,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="queries.css" />
+    <title>Cricket calculator</title>
+    <link rel="stylesheet" href="queries/queries.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap"
     />
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
     <link
       rel="stylesheet"
-      href="index.css
+      href="css/index.css
     "
     />
   </head>
   <body>
     <div class="logo-div">
-      <img src="logo-no-background.png" alt="Cricket calculator" class="logo" />
+      <img
+        src="img/logo-no-background.png"
+        alt="Cricket calculator"
+        class="logo"
+      />
     </div>
     <div class="options">
       <div class="test-match">
@@ -58,7 +62,7 @@
     <script>
       const currentYear = new Date().getFullYear();
       document.querySelector(".year").textContent = currentYear;
-      let version = "3.4";
+      let version = "3.4.1";
       document.querySelector(".verison").textContent = version;
     </script>
   </body>
