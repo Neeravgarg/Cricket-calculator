@@ -122,6 +122,8 @@ const starting = function () {
   p1i0.textContent = 0;
   p1i1.textContent = 0;
   scoreBoard = [0, 0, 0, 0];
+  target_runs = 0;
+  target.textContent = target_runs;
   document.querySelector(".leadplayer").textContent = "Player 1";
   document.querySelector(".leadtextwon").textContent = " has the lead of ";
   document.querySelector(".leadruns").textContent = 0;
@@ -150,8 +152,8 @@ const defaultTimeline = function () {
     // document.querySelector(".ball-7").classList.add("nonedis");           Working but not dynamic
     // var counterNode = document.removeElement("li");
     // document.querySelector("ul").appendChild(counterNode);                Not working
-    listEl.removeChild(listEl.lastElementChild); //Working 🎉
-    limit--;
+    listEl.removeChild(listEl.lastElementChild);
+    limit--; //Working 🎉
   }
   active_ball = 0;
 };
@@ -276,7 +278,7 @@ const fixSentence = function () {
 const needSentence = function () {
   if (fix == true) {
     console.log(target_runs);
-    document.querySelector(".leadplayer").textContent = "Player 1 ";
+    document.querySelector(".leadplayer").textContent = "Player 2 ";
     document.querySelector(".leadtextwon").textContent = " needs ";
     document.querySelector(".leadruns").textContent = target_runs - runs;
     document.querySelector(".some-words").textContent = " to win";
@@ -462,5 +464,5 @@ new_game.addEventListener("click", function () {
 
 const currentYear = new Date().getFullYear();
 document.querySelector(".year").textContent = currentYear;
-let version = "3.4.1";
+let version = "4.0";
 document.querySelector(".verison").textContent = version;
