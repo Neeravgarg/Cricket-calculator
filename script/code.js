@@ -87,7 +87,11 @@ const starting = function () {
   nb.disabled = false;
   p0i0.textContent = scoreBoard[0];
   p1i0.textContent = scoreBoard[1];
-  
+  document.querySelector(".leadplayer").textContent = ``;
+  document.querySelector(".leadtextwon").textContent = "";
+  document.querySelector(".leadruns").textContent = "";
+  document.querySelector(".some-words").textContent = ``;
+
   defaultTimeline();
 };
 starting();
@@ -227,7 +231,7 @@ const wicketFalls = function () {
       break;
   }
   console.log(runs);
-
+  totalBalls = 0;
   main_runs.textContent = runs;
   defaultTimeline();
 };
