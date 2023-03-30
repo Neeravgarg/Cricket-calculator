@@ -294,5 +294,5 @@ new_game.addEventListener("click", function () {
 });
 const currentYear = new Date().getFullYear();
 document.querySelector(".year").textContent = currentYear;
-let version = "4.0";
+let version = "5.0";
 document.querySelector(".verison").textContent = version;
