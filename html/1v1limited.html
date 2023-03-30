@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cricket calculator</title>
+    <link rel="stylesheet" href="/css/1v1limited.css" />
+    <link rel="stylesheet" href="queries/queries.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap"
+    />
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="main-container">
+        <button class="new btn">New Game</button>
+        <a href="/html/feed.html" class="Feed btn">Feedback</a>
+        <div class="name-of-player"><p class="player-name">Player 1</p></div>
+        <div class="score">
+          <div class="scr">
+            <p class="main-score">
+              <span class="score-number">10</span>
+            </p>
+          </div>
+          <div class="ovr">
+            <span class="overs"
+              ><span class="over">1</span>.<span class="balls">0</span></span
+            >
+          </div>
+          <div class="runrate">
+            <span class="rate">Run Rate : </span
+            ><span class="run_rate">0.00</span>
+          </div>
+        </div>
+        <div class="player">
+          <div class="head">
+            <div class="name"><p></p></div>
+            <div class="info">
+              <p class="bat-0">0</p>
+              <p class="bat-1">1</p>
+              <p class="bat-2">2</p>
+              <p class="bat-4">4</p>
+              <p class="bat-6">6</p>
+            </div>
+          </div>
+          <div class="bat">
+            <div class="name"><p>In this match</p></div>
+            <div class="info">
+              <p class="bat0">0</p>
+              <p class="bat1">0</p>
+              <p class="bat2">0</p>
+              <p class="bat4">0</p>
+              <p class="bat6">0</p>
+            </div>
+          </div>
+        </div>
+        <div class="time-line">
+          <ul class="time_line">
+            <li class="ball-1"></li>
+            <li class="ball-2"></li>
+            <li class="ball-3"></li>
+            <li class="ball-4"></li>
+            <li class="ball-5"></li>
+            <li class="ball-6"></li>
+          </ul>
+          <!-- <div class="ball"><p class="ball-1"></p></div>
+          <div class="ball"><p class="ball-2"></p></div>
+          <div class="ball"><p class="ball-3"></p></div>
+          <div class="ball"><p class="ball-4"></p></div>
+          <div class="ball"><p class="ball-5"></p></div>
+          <div class="ball"><p class="ball-6"></p></div> -->
+        </div>
+        <div class="btns">
+          <div class="other-btn">
+            <button class="btn btn--wide">Wide</button>
+            <button class="btn btn--nb">No Ball</button>
+            <button class="btn btn--other">Other</button>
+            <script></script>
+          </div>
+          <div class="main-btn">
+            <button class="btn btn--0">0</button>
+            <button class="btn btn--1">1</button>
+            <button class="btn btn--2">2</button>
+            <button class="btn btn--3">3</button>
+            <button class="btn btn--4">4</button>
+            <button class="btn btn--6">6</button>
+            <button class="btn btn--wicket">Wicket</button>
+          </div>
+        </div>
+        <div class="other">
+          <div class="inn">
+            <p class="player0inn0">
+              player 1 inn. 1 - <span class="p0i0">0</span>
+            </p>
+            <p class="player0inn0">
+              player 2 inn. 1 - <span class="p1i0">0</span>
+            </p>
+          </div>
+          <div class="lead">
+            <p class="leadtext">
+              <span class="leadplayer"></span><span class="leadtextwon"></span
+              ><span class="leadruns"></span><span class="some-words"></span>
+            </p>
+          </div>
+          <div class="target_cont">
+            <p class="target_sent">
+              <span>Target : </span><span class="target">0</span>
+            </p>
+          </div>
+          <div class="the">
+            <p class="thetext">
+              <span>last ball : </span><span class="last_ball">0</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="copyright-version">
+      <span>&copy; </span><span class="year">2022</span> by Neerav Garg<span
+        class="white"
+        >---</span
+      ><span>v</span><span class="verison">3.0</span>
+    </p>
+    <script src="/script/code.js"></script>
+  </body>
+</html>
