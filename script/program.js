@@ -53,12 +53,12 @@ let runs,
   wickets;
 
 const starting = function () {
-  //   userOvers = parseInt(prompt("how many overs do you want"));
-  //   namePlayer0 = prompt("enter the name of player1");
-  //   namePlayer1 = prompt("enter the name of player2");
+    userOvers = parseInt(prompt("how many overs do you want"));
+    namePlayer0 = prompt("enter the name of player1");
+    namePlayer1 = prompt("enter the name of player2");
   playerNameEl.textContent = namePlayer0;
   oneWicketFall = false;
-  userOvers = 2;
+//   userOvers = 2;
   runs = 0;
   balls = 0;
   overs = 0;
