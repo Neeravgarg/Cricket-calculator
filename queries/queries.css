@@ -1,7 +1,4 @@
 @media (max-width: 54em) {
-  .container {
-    position: absolute;
-  }
   .main-container {
     position: relative;
   }

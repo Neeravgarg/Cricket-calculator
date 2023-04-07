@@ -53,12 +53,15 @@ let runs,
   wickets;
 
 const starting = function () {
-    userOvers = parseInt(prompt("how many overs do you want"));
-    namePlayer0 = prompt("enter the name of player1");
-    namePlayer1 = prompt("enter the name of player2");
+  // userOvers = parseInt(prompt("how many overs do you want"));
+  // namePlayer0 = prompt("enter the name of player1");
+  // namePlayer1 = prompt("enter the name of player2");
+  userOvers = 2;
+  namePlayer1 = "shanu";
+  namePlayer0 = "anshu";
   playerNameEl.textContent = namePlayer0;
   oneWicketFall = false;
-  // userOvers = 2;
+
   runs = 0;
   balls = 0;
   overs = 0;
@@ -199,6 +202,7 @@ const winCheckerFunction = function () {
   }
 };
 const wicketFalls = function () {
+  timelineFunction("wk");
   totalWickets++;
   wickets++;
   wicktesEl.textContent = wickets;
@@ -244,12 +248,13 @@ const wicketFalls = function () {
         p1i0.textContent = scoreBoard[playerActive];
         break;
     }
+    defaultTimeline();
   }
   lastBall = "wicket";
   theLastBall.textContent = lastBall;
   console.log(runs);
   main_runs.textContent = runs;
-  defaultTimeline();
+
   overChange();
 };
 const limitChecker = function () {
@@ -313,3 +318,31 @@ const currentYear = new Date().getFullYear();
 document.querySelector(".year").textContent = currentYear;
 let version = "5.0";
 document.querySelector(".verison").textContent = version;
+
+const list = document.querySelectorAll(".nav-btn");
+
+function activeLink() {
+  list.forEach((item) => item.classList.remove("active-nav-btn"));
+  this.classList.add("active-nav-btn");
+}
+list.forEach((item) => item.addEventListener("click", activeLink));
+
+document.getElementById("btn-_h").addEventListener("click", function () {
+  document.getElementById("main-container1").classList.remove("nonedis");
+  document.getElementById("main-container2").classList.add("nonedis");
+  document.getElementById("main-container3").classList.add("nonedis");
+});
+document.getElementById("btn-_s").addEventListener("click", function () {
+  document.getElementById("main-container1").classList.add("nonedis");
+  document.getElementById("main-container2").classList.remove("nonedis");
+  document.getElementById("main-container3").classList.add("nonedis");
+});
+document.getElementById("btn-_t").addEventListener("click", function () {
+  document.getElementById("main-container1").classList.add("nonedis");
+  document.getElementById("main-container2").classList.add("nonedis");
+  document.getElementById("main-container3").classList.remove("nonedis");
+});
+
+document.querySelector(".mobile-nav-btn").addEventListener("click", () => {
+  document.querySelector(".header").classList.toggle("active");
+});

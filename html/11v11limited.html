@@ -7,17 +7,37 @@
     <title>Cricket calculator</title>
     <link rel="stylesheet" href="/css/11v11limited.css" />
     <link rel="stylesheet" href="/queries/queries.css" />
+    <link rel="stylesheet" href="/queries/responsive-menu.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;1,200&display=swap"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap"
     />
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
   </head>
   <body>
+    <header class="header">
+      <nav class="head-nav">
+        <ul class="head-nav-list">
+          <li class="head-nav-li">
+            <button id="btn-_h" class="nav-btn active-nav-btn">Home</button>
+          </li>
+          <li class="head-nav-li">
+            <button id="btn-_s" class="nav-btn">Score-card</button>
+          </li>
+          <li class="head-nav-li">
+            <button id="btn-_t" class="nav-btn">Time-line</button>
+          </li>
+        </ul>
+      </nav>
+      <div class="mobile-nav-btn">
+        <ion-icon name="menu-outline" class="mobile-nav-icon"></ion-icon>
+        <ion-icon name="close-outline" class="mobile-nav-icon"></ion-icon>
+      </div>
+    </header>
     <div class="container">
-      <div class="main-container">
+      <div class="main-container" id="main-container1">
         <button class="new btn">New Game</button>
         <a href="/html/feed.html" class="Feed btn">Feedback</a>
         <div class="name-of-player"><p class="player-name">Player 1</p></div>
@@ -62,12 +82,12 @@
         </div>
         <div class="time-line">
           <ul class="time_line">
-            <li class="ball-1"></li>
-            <li class="ball-2"></li>
-            <li class="ball-3"></li>
-            <li class="ball-4"></li>
-            <li class="ball-5"></li>
-            <li class="ball-6"></li>
+            <li class="ball-1 ball"></li>
+            <li class="ball-2 ball"></li>
+            <li class="ball-3 ball"></li>
+            <li class="ball-4 ball"></li>
+            <li class="ball-5 ball"></li>
+            <li class="ball-6 ball"></li>
           </ul>
           <!-- <div class="ball"><p class="ball-1"></p></div>
           <div class="ball"><p class="ball-2"></p></div>
@@ -120,6 +140,8 @@
           </div>
         </div>
       </div>
+      <div id="main-container2" class="main-container nonedis">Score-card</div>
+      <div id="main-container3" class="main-container nonedis">Time-line</div>
     </div>
     <p class="copyright-version">
       <span>&copy; </span><span class="year">2022</span> by Neerav Garg<span
@@ -128,5 +150,13 @@
       ><span>v</span><span class="verison">3.0</span>
     </p>
     <script src="/script/program.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>
