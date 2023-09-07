@@ -347,6 +347,7 @@ const setVariablesForInning = function (a) {
 let nameT1;
 let nameT2;
 let match = {
+  target: 0,
   currentInning: 0,
   matchWickets: 0,
   team1: {
@@ -355,6 +356,8 @@ let match = {
       allBatters: new Array(),
       allRuns: new Object(),
       allBalls: new Object(),
+      runs: 0,
+      extra: 0,
     },
     bowlingDept: {
       allBowlers: new Array(),
@@ -370,6 +373,8 @@ let match = {
       allBatters: new Array(),
       allRuns: new Object(),
       allBalls: new Object(),
+      runs: 0,
+      extra: 0,
     },
     bowlingDept: {
       allBowlers: new Array(),
@@ -493,8 +498,16 @@ function inputTakerAndValidChecker(message, type = 'str') {
   return theInput.toLowerCase();
 }
 
-const runAdder = function (value, normal = true) {
+const runAdder = function (num, normal = true, nb = false) {
+  let value = num;
+  if (nb) {
+    let moreNum = inputTakerAndValidChecker(
+      'How many runs are made on this ball (excluding the 1 run of no ball)'
+    );
+    value += moreNum;
+  }
   runs += value;
+  match[match.batting].battingDept.runs += value;
   main_runs.textContent = runs;
   wicket.disabled = false;
   // singlePlayerRuns += value;
@@ -550,7 +563,6 @@ const runAdder = function (value, normal = true) {
     match[match.bowling].bowlingDept.allRuns[
       match[match.bowling].bowlingDept.activeBowler
     ] += value;
-    match[match.batting].battingDept.runs += value;
     if (value % 2 !== 0) {
       switch (match.striker) {
         case 0:
@@ -562,9 +574,11 @@ const runAdder = function (value, normal = true) {
       }
     }
     console.log(`str : ${match.striker}`);
-    console.log(match);
     // team.allBowlers2[team.activeBowler]++;
+  } else if (!normal) {
+    match[match.batting].battingDept.extra += value;
   }
+  console.log(match);
 
   //
   //
@@ -766,17 +780,17 @@ const needSentenceFunction = function () {
     } balls`;
   }
 };
-const btnDisabledFunction = function () {
-  btn0.disabled = true;
-  btn1.disabled = true;
-  btn2.disabled = true;
-  btn3.disabled = true;
-  btn4.disabled = true;
-  btn6.disabled = true;
-  wicket.disabled = true;
-  wide.disabled = true;
-  nb.disabled = true;
+
+let buttons = [btn0, btn1, btn2, btn3, btn4, btn6, wicket, wide, nb];
+
+const btnDisabledFunction = function (a = true) {
+  if (a) {
+    buttons.forEach(i => (i.disabled = true));
+  } else if (!a) {
+    buttons.forEach(i => (i.disabled = false));
+  }
 };
+
 const winCheckerFunction = function () {
   if (playerActive === 1) {
     if (runs == target || runs > target) {
@@ -804,50 +818,63 @@ const allOutChecker = function () {};
 // };
 
 const startSecondInning = function () {
-  document.querySelector('.main-scr').classList.toggle('none');
-  document.querySelector('.info-scr-3').classList.toggle('none');
+  btnDisabledFunction();
+  setTimeout(() => {
+    console.log('Delayed for 1 second.');
 
-  // teamToggler(match.batting);
-  // teamToggler(match.bowling);
+    document.querySelector('.main-scr').classList.toggle('none');
+    document.querySelector('.alert-scr').classList.toggle('none');
 
-  switch (match.batting) {
-    case 'team1':
-      match.batting = 'team2';
-      break;
-    case 'team2':
-      match.batting = 'team1';
-      break;
+    document.querySelector('.continue').addEventListener('click', () => {
+      document.querySelector('.alert-scr').classList.toggle('none');
+      document.querySelector('.info-scr-3').classList.toggle('none');
 
-    default:
-      break;
-  }
-  switch (match.bowling) {
-    case 'team1':
-      match.bowling = 'team2';
-      break;
-    case 'team2':
-      match.bowling = 'team1';
-      break;
+      btnDisabledFunction(false);
+      // teamToggler(match.batting);
+      // teamToggler(match.bowling);
 
-    default:
-      break;
-  }
-  balls = 0;
-  overs = 0;
-  runs = 0;
-  runRate = 0;
-  totalBalls = 0;
-  wickets = 0;
-  main_runs.textContent = runs;
-  oversEl.textContent = overs;
-  ballsEl.textContent = balls;
-  runrate.textContent = runRate;
-  wicktesEl.textContent = wickets;
-  match.currentInning = 1;
-  document.querySelector('.next-3').addEventListener('click', () => {
-    setVariablesForInning(1);
-    console.log(match);
-  });
+      switch (match.batting) {
+        case 'team1':
+          match.batting = 'team2';
+          break;
+        case 'team2':
+          match.batting = 'team1';
+          break;
+
+        default:
+          break;
+      }
+      switch (match.bowling) {
+        case 'team1':
+          match.bowling = 'team2';
+          break;
+        case 'team2':
+          match.bowling = 'team1';
+          break;
+
+        default:
+          break;
+      }
+      balls = 0;
+      overs = 0;
+      runs = 0;
+      runRate = 0;
+      totalBalls = 0;
+      wickets = 0;
+      main_runs.textContent = runs;
+      oversEl.textContent = overs;
+      ballsEl.textContent = balls;
+      runrate.textContent = runRate;
+      wicktesEl.textContent = wickets;
+      match.currentInning = 1;
+      document.querySelector('.next-3').addEventListener('click', () => {
+        setVariablesForInning(1);
+        document.querySelector('.info-scr-3').classList.add('none');
+        document.querySelector('.main-scr').classList.remove('none');
+        console.log(match);
+      });
+    });
+  }, 500);
 };
 
 const inningChange = function () {
@@ -1052,7 +1079,7 @@ const limitChecker = function () {
 };
 
 const specialRunAdder = function (value) {
-  runAdder(1, false);
+  runAdder(1, false, true);
   RunRate();
   scoreBoardUpdater();
   specialTimelineFunction(value);
