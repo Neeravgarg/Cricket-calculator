@@ -25,6 +25,7 @@ const ball5 = document.querySelector('.ball-5');
 const ball6 = document.querySelector('.ball-6');
 const theLastBall = document.querySelector('.last_ball');
 const listEl = document.querySelector('.time_line');
+const secondTimeline = document.querySelector('.time_line_2 ');
 const playerNameEl = document.querySelector('.player-name');
 const wicktesEl = document.querySelector('.wickets');
 const scorecardEl = document.querySelector('.main_scorecard');
@@ -105,6 +106,7 @@ const starting = function () {
   userBalls = userOvers * 6;
   ballsPlayer1 = 0;
   activeTimeline = [0, 0, 0, 0, 0, 0];
+  secondaryTimeline = ['', '', '', '', '', ''];
   limit = 6;
   active_ball = 0;
   lastBall = 0;
@@ -594,21 +596,6 @@ const runAdder = function (num, normal = true, nb = false) {
   //
 };
 const overChange = function () {
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-
   match[match.batting].battingDept.allBalls[
     match[match.batting].battingDept.activeBatters[match.striker]
   ]++;
@@ -616,22 +603,6 @@ const overChange = function () {
     match[match.bowling].bowlingDept.activeBowler
   ]++;
 
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
   balls++;
   if (balls === 6) {
     balls = 0;
@@ -648,18 +619,7 @@ const overChange = function () {
     oversEl.textContent = overs;
     ballsEl.textContent = balls;
     totalBalls++;
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+
     if (overs !== match.overs) {
       let newBowler = inputTakerAndValidChecker(
         'Enter the name of the new bowler : '
@@ -733,17 +693,30 @@ const scoreBoardUpdater = function () {
 };
 function defaultTimeline() {
   activeTimeline = [0, 0, 0, 0, 0, 0];
+  secondaryTimeline = ['', '', '', '', '', ''];
+
+  let ballsArray = [ball1, ball2, ball3, ball4, ball5, ball6];
+
   ball1.textContent = '';
   ball2.textContent = '';
   ball3.textContent = '';
   ball4.textContent = '';
   ball5.textContent = '';
   ball6.textContent = '';
+
+  document.querySelector('.ball-1-1').textContent = '';
+  document.querySelector('.ball-2-2').textContent = '';
+  document.querySelector('.ball-3-1').textContent = '';
+  document.querySelector('.ball-4-4').textContent = '';
+  document.querySelector('.ball-5-6').textContent = '';
+  document.querySelector('.ball-6-6').textContent = '';
+
   console.log(activeTimeline);
   console.log('defaultTimeline function called');
   while (limit > 6) {
     console.log(extraBalls);
     listEl.removeChild(listEl.lastElementChild);
+    secondTimeline.removeChild(secondTimeline.lastChild);
     limit--;
   }
   active_ball = 0;
@@ -763,11 +736,16 @@ const timelineFunction = function (runs) {
 const specialTimelineFunction = function (value) {
   extraBalls++;
   limit++;
+
   var node = document.createElement('li');
   node.classList.add(`ball-${limit}`);
   node.classList.add('ball');
   node.appendChild(document.createTextNode(''));
   listEl.appendChild(node);
+
+  var node2 = document.createElement('li');
+  node.classList.add(`ball-${limit}-${limit}`);
+
   timelineFunction(value);
 };
 const needSentenceFunction = function () {
@@ -914,80 +892,6 @@ const inningChange = function () {
 };
 
 const wicketFalls = () => {
-  // console.log('before wicket //////////////////');
-
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  // singlePlayerRuns = 0;
-  totalWickets++;
-
-  // let newBatter = inputTakerAndValidChecker('Enter the name of new batter');
-  // team.allPlayers1.push(newBatter);
-  // team.allRuns1[newBatter] = 0;
-  // team.allBalls1[newBatter] = 0;
-  // team.activeBatters1[team.striker] = newBatter;
-  // // team.allBalls1[team.activeBatters[team.striker]] = 0;
-  // console.log(team.allBalls1);
-  // console.log(team.allPlayers1);
-  // console.log(team.allRuns1);
-  // console.log(`striker: ${team.activeBatters1[team.striker]}`);
-  // console.log('\nafter wicket /////////////////////////////////\n');
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  ///////////////////////////////////////////////////////////////////////////////
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-
   if (match.matchWickets < 9) {
     wickets++;
     wicktesEl.textContent = wickets;
@@ -1017,48 +921,7 @@ const wicketFalls = () => {
   } else if (match.matchWickets == 9) {
     startSecondInning();
   }
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //////////////////////////////////////////////////////////////////////////////////
-  //
-  //
-  //
-  //
-  //
-  //
-  //
+
   overChange();
   timelineFunction('wk');
   if (totalWickets == 10 || totalWickets == 20) {
