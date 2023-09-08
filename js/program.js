@@ -174,6 +174,14 @@ const setVariablesForInning = function (a) {
     if (match[match.batting].allPlayers.includes(bat2) == false) {
       match[match.batting].allPlayers.push(bat2);
     }
+
+    if (!a) {
+      document.querySelector('.p0i0-name').textContent =
+        match[match.batting].name;
+
+      document.querySelector('.p1i0-name').textContent =
+        match[match.bowling].name;
+    }
     match[match.batting].battingDept.activeBatters = new Array();
     match[match.batting].battingDept.activeBatters.push(bat1, bat2);
     match[match.batting].battingDept.allBatters.push(bat1, bat2);
@@ -273,6 +281,7 @@ document.querySelector('.next').addEventListener('click', () => {
     document.getElementById('chk-2').checked == false
   ) {
     match.firstBat = 'team1';
+    match.firstBowl = 'team2';
     match.batting = 'team1';
     match.bowling = 'team2';
     match.team1.first = 'bat';
@@ -283,6 +292,7 @@ document.querySelector('.next').addEventListener('click', () => {
     document.getElementById('chk-1').checked == false
   ) {
     match.firstBat = 'team2';
+    match.firstBowl = 'team1';
     match.batting = 'team2';
     match.bowling = 'team1';
     match.team2.first = 'bat';
@@ -547,6 +557,12 @@ const RunRate = function () {
 const scoreBoardUpdater = function () {
   scoreBoard[playerActive] = runs;
 };
+
+function mainScrSummaryUpdater() {
+  p0i0.textContent = match[match.firstBat].battingDept.runs;
+  p1i0.textContent = match[match.firstBowl].battingDept.runs;
+}
+
 function defaultTimeline() {
   activeTimeline = [0, 0, 0, 0, 0, 0];
   secondaryTimeline = ['', '', '', '', '', ''];
@@ -645,9 +661,14 @@ const btnDisabledFunction = function (a = true) {
 };
 
 const winCheckerFunction = function () {
-  if (playerActive === 1) {
-    if (runs == target || runs > target) {
-      // document.querySelector('.leadplayer').textContent = `${namePlayer1} `;
+  if (match.currentInning == 1) {
+    if (
+      match[match.batting].battingDept.runs == match.target ||
+      match[match.batting].battingDept.runs > match.target
+    ) {
+      document.querySelector('.leadplayer').textContent = `${
+        match[match.firstBat].name
+      } `;
       document.querySelector('.leadtextwon').textContent = ' has won the match';
       document.querySelector('.leadruns').textContent = '';
       document.querySelector('.some-words').textContent = '';
@@ -657,7 +678,9 @@ const winCheckerFunction = function () {
   }
 };
 
-const allOutChecker = function () {};
+const SecondInningallOutChecker = function () {
+  // if (match.currentInning == 1 && match) {}
+};
 
 // const teamToggler = function (a) {
 //   switch (a) {
@@ -708,12 +731,16 @@ const startSecondInning = function () {
         default:
           break;
       }
+      match.target = runs + 1;
+      targetEl.textContent = match.target;
+      p0i0.textContent = runs;
       balls = 0;
       overs = 0;
       runs = 0;
       runRate = 0;
       totalBalls = 0;
       wickets = 0;
+      match.matchWickets = 0;
       main_runs.textContent = runs;
       oversEl.textContent = overs;
       ballsEl.textContent = balls;
@@ -767,34 +794,54 @@ const inningChange = function () {
 };
 
 const wicketFalls = () => {
-  if (match.matchWickets < 9) {
-    wickets++;
-    wicktesEl.textContent = wickets;
-    match.matchWickets++;
-    let newBatter = inputTakerAndValidChecker(
-      'Enter the name of the new batsman : '
-    );
-    while (match[match.batting].allPlayers.includes(newBatter)) {
-      newBatter = inputTakerAndValidChecker(
-        'SAME \nEnter the name of the new batsman : '
+  if (match.currentInning == 0) {
+    if (match.matchWickets < 9) {
+      wickets++;
+      wicktesEl.textContent = wickets;
+      match.matchWickets++;
+      let newBatter = inputTakerAndValidChecker(
+        'Enter the name of the new batsman : '
       );
+      while (match[match.batting].allPlayers.includes(newBatter)) {
+        newBatter = inputTakerAndValidChecker(
+          'SAME \nEnter the name of the new batsman : '
+        );
+      }
+
+      match[match.batting].allPlayers.push(newBatter);
+      match[match.batting].battingDept.allBatters.push(newBatter);
+
+      match[match.batting].battingDept.activeBatters[match.striker] = newBatter;
+      match[match.batting].battingDept.allRuns[
+        match[match.batting].battingDept.activeBatters[match.striker]
+      ] = 0;
+      match[match.batting].battingDept.allBalls[
+        match[match.batting].battingDept.activeBatters[match.striker]
+      ] = 0;
+      match[match.bowling].bowlingDept.allWickets[
+        match[match.bowling].bowlingDept.activeBowler
+      ]++;
+    } else if (match.matchWickets == 9) {
+      startSecondInning();
     }
-
-    match[match.batting].allPlayers.push(newBatter);
-    match[match.batting].battingDept.allBatters.push(newBatter);
-
-    match[match.batting].battingDept.activeBatters[match.striker] = newBatter;
-    match[match.batting].battingDept.allRuns[
-      match[match.batting].battingDept.activeBatters[match.striker]
-    ] = 0;
-    match[match.batting].battingDept.allBalls[
-      match[match.batting].battingDept.activeBatters[match.striker]
-    ] = 0;
-    match[match.bowling].bowlingDept.allWickets[
-      match[match.bowling].bowlingDept.activeBowler
-    ]++;
-  } else if (match.matchWickets == 9) {
-    startSecondInning();
+  } else if (match.currentInning == 1) {
+    /////////////////////////////////////
+    /////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //
+    //
+    //
+    //
+    // Start from here
+    //
+    //
+    //
+    //
+    //
+    ////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////
+    /////////////////////////////////////
   }
 
   overChange();
@@ -826,6 +873,7 @@ const specialRunAdder = function (value) {
   scoreBoardUpdater();
   extraTimlineCircleAdder();
   timelineFunction(value, false, moreNum, value);
+  mainScrSummaryUpdater();
   needSentenceFunction();
   winCheckerFunction();
 };
@@ -834,6 +882,7 @@ const superFunction = function (value) {
   overChange();
   timelineFunction(value);
   RunRate();
+  mainScrSummaryUpdater();
   scoreBoardUpdater();
   needSentenceFunction();
   winCheckerFunction();
