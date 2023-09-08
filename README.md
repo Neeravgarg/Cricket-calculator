@@ -7,8 +7,6 @@ In the development stages
 
 Currently being worked on: 
 
-
-special run adder :
-1. To update the timeline more readable
-2. To change the striker according to the runs
-3. To work on wide, byes, etc.
+1. Continuing the inning after the start of second inning
+2. Monitoring the overall data got from the scorer
+3. Displaying the correct target lines, sentences, run-rate
