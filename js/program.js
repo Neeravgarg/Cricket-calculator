@@ -188,16 +188,16 @@ const setVariablesForInning = function (a) {
 
     match.striker = 0;
     match[match.batting].battingDept.allRuns[
-      match[match.batting].allPlayers[0]
+      match[match.batting].battingDept.allBatters[0]
     ] = 0;
     match[match.batting].battingDept.allRuns[
-      match[match.batting].allPlayers[1]
+      match[match.batting].battingDept.allBatters[1]
     ] = 0;
     match[match.batting].battingDept.allBalls[
-      match[match.batting].allPlayers[0]
+      match[match.batting].battingDept.allBatters[0]
     ] = 0;
     match[match.batting].battingDept.allBalls[
-      match[match.batting].allPlayers[1]
+      match[match.batting].battingDept.allBatters[1]
     ] = 0;
     match[match.batting].battingDept.runs = 0;
 
@@ -501,7 +501,7 @@ const overChange = function () {
           match[match.bowling].bowlingDept.allBowlers.includes(newBowler) ==
           false
         ) {
-          match[match.bowling].allPlayers.push(newBowler);
+          match[match.bowling].bowlingDept.allBowlers.push(newBowler);
           match[match.bowling].bowlingDept.allWickets[
             match[match.bowling].bowlingDept.activeBowler
           ] = 0;
@@ -511,6 +511,9 @@ const overChange = function () {
           match[match.bowling].bowlingDept.allBalls[
             match[match.bowling].bowlingDept.activeBowler
           ] = 0;
+        }
+        if (match[match.bowling].allPlayers.includes(newBowler) == false) {
+          match[match.bowling].allPlayers.push(newBowler);
         }
       }
     }
@@ -794,7 +797,7 @@ const inningChange = function () {
 };
 
 const wicketFalls = () => {
-  if (match.currentInning == 0) {
+  if (match.currentInning == 1) {
     if (match.matchWickets < 9) {
       wickets++;
       wicktesEl.textContent = wickets;
@@ -802,16 +805,22 @@ const wicketFalls = () => {
       let newBatter = inputTakerAndValidChecker(
         'Enter the name of the new batsman : '
       );
-      while (match[match.batting].allPlayers.includes(newBatter)) {
+      while (match[match.batting].battingDept.allBatters.includes(newBatter)) {
         newBatter = inputTakerAndValidChecker(
           'SAME \nEnter the name of the new batsman : '
         );
       }
-
-      match[match.batting].allPlayers.push(newBatter);
-      match[match.batting].battingDept.allBatters.push(newBatter);
+      if (match[match.batting].allPlayers.includes(newBatter) == false) {
+        match[match.batting].allPlayers.push(newBatter);
+      }
+      if (
+        match[match.batting].battingDept.allBatters.includes(newBatter) == false
+      ) {
+        match[match.batting].battingDept.allBatters.push(newBatter);
+      }
 
       match[match.batting].battingDept.activeBatters[match.striker] = newBatter;
+
       match[match.batting].battingDept.allRuns[
         match[match.batting].battingDept.activeBatters[match.striker]
       ] = 0;
@@ -852,6 +861,7 @@ const wicketFalls = () => {
   lastBall = 'wicket';
   theLastBall.textContent = lastBall;
   console.log(runs);
+  console.log(match);
   main_runs.textContent = runs;
 };
 const limitChecker = function () {
@@ -878,8 +888,8 @@ const specialRunAdder = function (value) {
   winCheckerFunction();
 };
 const superFunction = function (value) {
-  runAdder(value);
   overChange();
+  runAdder(value);
   timelineFunction(value);
   RunRate();
   mainScrSummaryUpdater();
