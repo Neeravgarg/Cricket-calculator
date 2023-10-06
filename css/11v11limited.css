@@ -37,8 +37,108 @@ body {
   border-radius: 0.5rem;
   background-color: #fff;
   position: relative;
-  margin-top: -7.5rem;
   overflow: scroll;
+  margin-top: -7.5rem;
+}
+.main-container-new {
+  width: 100rem;
+  height: 47.5rem;
+  margin-top: -4rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 2rem;
+  box-shadow: 0 0.3rem 3rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  background-color: #fff;
+  position: relative;
+  overflow: scroll;
+  width: 100rem;
+  height: 47.5rem;
+  margin-top: -2.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 2rem;
+  box-shadow: 0 0.3rem 3rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  background-color: #fff;
+  position: relative;
+  overflow: scroll;
+  grid-template-rows: 1fr;
+}
+.sub-cont {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 9fr;
+  padding-bottom: 2rem;
+}
+.sub-cont-1 {
+  border-right: 1px solid #bbb;
+}
+.sub-cont-2 {
+  border-left: 1px solid #bbb;
+}
+.sub-cont-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+.sub-cont-name {
+  font-size: 2rem;
+  color: #444;
+}
+.sub-cont-status {
+  font-size: 1.75rem;
+  color: #444;
+}
+.sub-cont-main {
+  display: grid;
+  grid-template-rows: 6fr 4fr;
+  gap: 2rem;
+}
+.sub-cont-bat {
+  display: grid;
+  grid-template-rows: repeat(13, 1fr);
+}
+.batter {
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+}
+.batter-name {
+  text-align: start;
+  padding-left: 2rem;
+}
+.extra {
+  display: grid;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 2.5rem;
+  font-size: 1rem;
+}
+.sub-cont-ball {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.bowler {
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+}
+.bowler-name {
+  text-align: start;
+  padding-left: 2rem;
+}
+.sub-cont-headers {
+  color: #999 !important;
 }
 .score {
   padding: 1rem;
@@ -492,4 +592,7 @@ label {
   justify-content: center;
   display: flex;
   margin-top: 10rem;
+}
+.border1 {
+  border: 1px solid black;
 }
