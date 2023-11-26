@@ -53,7 +53,7 @@ body {
   position: relative;
   overflow: scroll;
   width: 100rem;
-  height: 47.5rem;
+  height: 52.5rem;
   margin-top: -2.5rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -77,6 +77,7 @@ body {
 }
 .sub-cont-2 {
   border-left: 1px solid #bbb;
+  padding-left: 2.5rem;
 }
 .sub-cont-head {
   display: flex;
@@ -100,14 +101,27 @@ body {
 .sub-cont-bat {
   display: grid;
   grid-template-rows: repeat(13, 1fr);
+  /* display: flex;
+  flex-direction: column; */
+  position: relative;
+}
+.sub-cont-img {
+  width: 2.2rem;
+  height: 2.2rem;
+  position: absolute;
+  top: -0.6rem;
+  left: 0;
 }
 .batter {
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 12fr 3fr 3fr 3fr;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 1rem;
+}
+.batter-active {
+  padding-top: 0.6rem;
 }
 .batter-name {
   text-align: start;
@@ -119,15 +133,17 @@ body {
   justify-content: flex-end;
   padding: 0 2.5rem;
   font-size: 1rem;
+  grid-row: -1;
 }
 .sub-cont-ball {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
 }
 .bowler {
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 12fr 3fr 3fr 3fr;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -139,6 +155,14 @@ body {
 }
 .sub-cont-headers {
   color: #999 !important;
+}
+
+.sub-cont-status-over {
+  font-size: 0.8rem;
+}
+.sub-cont-status-bar {
+  display: flex;
+  gap: 1rem;
 }
 .score {
   padding: 1rem;
@@ -234,13 +258,18 @@ body {
   display: grid;
   grid-template-columns: 6fr 3fr;
   gap: 0.5rem;
-  grid-template-rows: 6fr 1fr;
+  grid-template-rows: 6fr 2fr;
+  align-items: center;
+  justify-content: center;
 }
 .inn {
   padding: 1rem;
   display: grid;
   grid-template-rows: 1fr 1fr;
   row-gap: 1rem;
+}
+.the {
+  grid-column: 2/3;
 }
 .lead {
   padding: 1rem;
@@ -594,5 +623,10 @@ label {
   margin-top: 10rem;
 }
 .border1 {
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  /* box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.09); */
+}
+.opaque {
+  opacity: 0;
+  pointer-events: none;
 }
